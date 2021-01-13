@@ -86,13 +86,13 @@ sub new {
 
 =head1 SYNOPSIS
 
-    my $tda_classes = NWN::2da::Classes->new()
+    my $tda_classes = NWN::2da::classes->new()
 
     print $tda_classes->{header}->{Name}->{description};
 
 =head1 DESCRIPTION
 
-    Info on the classes.2da file.
+    This module contains the specification of the classes.2da file.
 
 =head1 MORE INFO
 
