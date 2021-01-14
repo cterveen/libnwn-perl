@@ -58,6 +58,12 @@ sub fails {
   return $self->{fails};
 }
 
+sub test_file {
+  my $self = shift;
+
+  $self->assert_maxrows($self->rows, $self->{spec}->maxrows());
+}
+
 sub test_datatypes {
   my $self = shift;
   my @headers = $self->headers();
@@ -68,19 +74,43 @@ sub test_datatypes {
 
     my $row = 1;
     foreach my $value(@col) {
-      my $result = $self->assert_datatype($value, $self->{spec}->{header}->{$header}->{datatype});
-      if (!$result) {
-        $self->setError("Error on datatype for " . $header . "(" . $row . "):\n  Expected:"  . $self->{spec}->{header}->{$header}->{datatype} . "\n  Found:" . $value . "\n");
-      }
+      $self->assert_datatype($value, $self->{spec}->datatype($header), "Error on datatype for " . $header . "(" . $row . "):");
       $row++;
     }
   }
+}
+
+sub assert_maxrows {
+  my $self = shift;
+  my $value = shift;
+  my $expected = shift;
+  my $message = shift;
+
+  $self->{tests}++;
+
+  if (!defined($message)) {
+    $message = "Error on the maximum number of rows:";
+  }
+  if ($expected == 0) {
+    return 1;
+  }
+  elsif ($value <= $expected) {
+    return 1;
+  }
+
+  $self->setError($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
+  return 0;
 }
 
 sub assert_datatype {
   my $self = shift;
   my $value = shift;
   my $expected = shift;
+  my $message = shift;
+
+  if (!defined($message)) {
+    $message = "Error on datatype:"
+  }
 
   $self->{tests}++;
 
@@ -91,41 +121,37 @@ sub assert_datatype {
     if ($value eq "****") {
       return 1;
     }
-    return 0;
   }
-  if ($expected eq "float") {
+  elsif ($expected eq "float") {
     if ($value =~ m/^\-?\d+(\.\d+)?$/) {
       return 1;
     }
     if ($value eq "****") {
       return 1;
     }
-    return 0;
   }
-  if ($expected eq "bool") {
+  elsif ($expected eq "bool") {
     if ($value eq "0" || $value eq "1" || $value eq "****") {
       return 1;
     }
-    return 0;
   }
-  if ($expected eq "string") {
+  elsif ($expected eq "string") {
     if ($value =~ m/^[\w*]+$/) {
       return 1;
     }
     if ($value eq "****") {
       return 1;
     }
-    return 0;
   }
-  if ($expected eq "hex") {
+  elsif ($expected eq "hex") {
     if ($value =~ m/^0x\d+$/) {
       return 1;
     }
     if ($value eq "****") {
       return 1;
     }
-    return 0;
   }
+  $self->setError($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
   return 0;
 }
 
@@ -166,6 +192,10 @@ sub assert_datatype {
     Test whether each item in a column is of the correct data type. Currently
     supports tests for bool, int, string, fload and hex values. Ignores the
     cell if the value is empty (****).
+
+item test_files()
+
+     Tests the maximum number of rows.
 
 =item tests()
 
