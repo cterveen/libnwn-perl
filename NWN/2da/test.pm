@@ -27,11 +27,11 @@ sub load_spec {
     $self->{spec} = NWN::2da::spec::classes->new();
   }
   else {
-    $self->setError("Unknown class");
+    $self->set_error("Unknown class");
   }  
 }
 
-sub setError {
+sub set_error {
   my $self = shift;
   my $error = shift;
   
@@ -78,28 +78,6 @@ sub test_datatypes {
       $row++;
     }
   }
-}
-
-sub assert_maxrows {
-  my $self = shift;
-  my $value = shift;
-  my $expected = shift;
-  my $message = shift;
-
-  $self->{tests}++;
-
-  if (!defined($message)) {
-    $message = "Error on the maximum number of rows:";
-  }
-  if ($expected == 0) {
-    return 1;
-  }
-  elsif ($value <= $expected) {
-    return 1;
-  }
-
-  $self->setError($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
-  return 0;
 }
 
 sub assert_datatype {
@@ -151,7 +129,29 @@ sub assert_datatype {
       return 1;
     }
   }
-  $self->setError($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
+  $self->set_error($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
+  return 0;
+}
+
+sub assert_maxrows {
+  my $self = shift;
+  my $value = shift;
+  my $expected = shift;
+  my $message = shift;
+
+  $self->{tests}++;
+
+  if (!defined($message)) {
+    $message = "Error on the maximum number of rows:";
+  }
+  if ($expected == 0) {
+    return 1;
+  }
+  elsif ($value <= $expected) {
+    return 1;
+  }
+
+  $self->set_error($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
   return 0;
 }
 
@@ -193,7 +193,7 @@ sub assert_datatype {
     supports tests for bool, int, string, fload and hex values. Ignores the
     cell if the value is empty (****).
 
-item test_files()
+=item test_files()
 
      Tests the maximum number of rows.
 
