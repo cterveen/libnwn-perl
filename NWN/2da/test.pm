@@ -221,6 +221,7 @@ sub reference {
     maximum.
 
 =item reference()
+
     Returns a string with a reference for the header. The reference can be one
     of the following forms: 'tlk' as reference to the TLK table, '2da' as
     reference to a 2da file, 'header{file}.2da', 'row/{file}.2da' as a
