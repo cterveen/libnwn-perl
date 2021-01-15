@@ -1,239 +1,298 @@
-package NWN::2da::spec::classes;
+package NWN::2da::test;
+
+use NWN::2da;
+use strict;
+use warnings;
+
+our(@ISA);
+@ISA = qw(NWN::2da);
 
 sub new {
   my $class = shift;
+  my $file = shift;
+
   my $self = {};
-
-  $self->{type} = "classes";
-  $self->{maxrows} = 254;
-  $self->{child} = 0;
-
-  $self->{header}->{"[id]"}->{datatype} = "int";
-  $self->{header}->{Label}->{datatype} = "string";
-  $self->{header}->{Name}->{datatype} = "int";
-  $self->{header}->{Plural}->{datatype} = "int";
-  $self->{header}->{Lower}->{datatype} = "int";
-  $self->{header}->{Description}->{datatype} = "int";
-  $self->{header}->{Icon}->{datatype} = "string";
-  $self->{header}->{HitDie}->{datatype} = "int";
-  $self->{header}->{AttackBonusTable}->{datatype} = "string";
-  $self->{header}->{FeatsTable}->{datatype} = "string";
-  $self->{header}->{SavingThrowTable}->{datatype} = "string";
-  $self->{header}->{SkillsTable}->{datatype} = "string";
-  $self->{header}->{BonusFeatsTable}->{datatype} = "string";
-  $self->{header}->{SkillPointBase}->{datatype} = "int";
-  $self->{header}->{SpellGainTable}->{datatype} = "string";
-  $self->{header}->{SpellKnownTable}->{datatype} = "string";
-  $self->{header}->{PlayerClass}->{datatype} = "bool";
-  $self->{header}->{SpellCaster}->{datatype} = "bool";
-  $self->{header}->{Str}->{datatype} = "int";
-  $self->{header}->{Dex}->{datatype} = "int";
-  $self->{header}->{Con}->{datatype} = "int";
-  $self->{header}->{Wis}->{datatype} = "int";
-  $self->{header}->{Int}->{datatype} = "int";
-  $self->{header}->{Cha}->{datatype} = "int";
-  $self->{header}->{PrimaryAbil}->{datatype} = "string";
-  $self->{header}->{AlignRestrict}->{datatype} = "hex";
-  $self->{header}->{AlignRstrctType}->{datatype} = "hex";
-  $self->{header}->{InvertRestrict}->{datatype} = "bool";
-  $self->{header}->{Constant}->{datatype} = "string";
-  $self->{header}->{EffCRLvl01}->{datatype} = "int";
-  $self->{header}->{EffCRLvl02}->{datatype} = "int";
-  $self->{header}->{EffCRLvl03}->{datatype} = "int";
-  $self->{header}->{EffCRLvl04}->{datatype} = "int";
-  $self->{header}->{EffCRLvl05}->{datatype} = "int";
-  $self->{header}->{EffCRLvl06}->{datatype} = "int";
-  $self->{header}->{EffCRLvl07}->{datatype} = "int";
-  $self->{header}->{EffCRLvl08}->{datatype} = "int";
-  $self->{header}->{EffCRLvl09}->{datatype} = "int";
-  $self->{header}->{EffCRLvl10}->{datatype} = "int";
-  $self->{header}->{EffCRLvl11}->{datatype} = "int";
-  $self->{header}->{EffCRLvl12}->{datatype} = "int";
-  $self->{header}->{EffCRLvl13}->{datatype} = "int";
-  $self->{header}->{EffCRLvl14}->{datatype} = "int";
-  $self->{header}->{EffCRLvl15}->{datatype} = "int";
-  $self->{header}->{EffCRLvl16}->{datatype} = "int";
-  $self->{header}->{EffCRLvl17}->{datatype} = "int";
-  $self->{header}->{EffCRLvl18}->{datatype} = "int";
-  $self->{header}->{EffCRLvl19}->{datatype} = "int";
-  $self->{header}->{EffCRLvl20}->{datatype} = "int";
-  $self->{header}->{PreReqTable}->{datatype} = "string";
-  $self->{header}->{MaxLevel}->{datatype} = "int";
-  $self->{header}->{XPPenalty}->{datatype} = "bool";
-  $self->{header}->{ArcSpellLvlMod}->{datatype} = "int";
-  $self->{header}->{DivSpellLvlMod}->{datatype} = "int";
-  $self->{header}->{EpicLevel}->{datatype} = "int";
-  $self->{header}->{Package}->{datatype} = "int";
-  $self->{header}->{StatGainTable}->{datatype} = "string";
-  $self->{header}->{MemorizesSpells}->{datatype} = "bool";
-  $self->{header}->{SpellbookRestricted}->{datatype} = "bool";
-  $self->{header}->{PickDomains}->{datatype} = "bool";
-  $self->{header}->{PickSchool}->{datatype} = "bool";
-  $self->{header}->{LearnScroll}->{datatype} = "bool";
-  $self->{header}->{Arcane}->{datatype} = "bool";
-  $self->{header}->{ASF}->{datatype} = "bool";
-  $self->{header}->{SpellcastingAbil}->{datatype} = "string";
-  $self->{header}->{SpellTableColumn}->{datatype} = "string";
-  $self->{header}->{CLMultiplier}->{datatype} = "float";
-  $self->{header}->{MinCastingLevel}->{datatype} = "int";
-  $self->{header}->{MinAssociateLevel}->{datatype} = "int";
-  $self->{header}->{CanCastSpontaneously}->{datatype} = "bool";
-
-  $self->{header}->{"[id]"}->{reference} = "";
-  $self->{header}->{Label}->{reference} = "";
-  $self->{header}->{Name}->{reference} = "tlk";
-  $self->{header}->{Plural}->{reference} = "tlk";
-  $self->{header}->{Lower}->{reference} = "tlk";
-  $self->{header}->{Description}->{reference} = "tlk";
-  $self->{header}->{Icon}->{reference} = "texture";
-  $self->{header}->{HitDie}->{reference} = "";
-  $self->{header}->{AttackBonusTable}->{reference} = "2da";
-  $self->{header}->{FeatsTable}->{reference} = "2da";
-  $self->{header}->{SavingThrowTable}->{reference} = "2da";
-  $self->{header}->{SkillsTable}->{reference} = "2da";
-  $self->{header}->{BonusFeatsTable}->{reference} = "2da";
-  $self->{header}->{SkillPointBase}->{reference} = "";
-  $self->{header}->{SpellGainTable}->{reference} = "2da";
-  $self->{header}->{SpellKnownTable}->{reference} = "2da";
-  $self->{header}->{PlayerClass}->{reference} = "";
-  $self->{header}->{SpellCaster}->{reference} = "";
-  $self->{header}->{Str}->{reference} = "";
-  $self->{header}->{Dex}->{reference} = "";
-  $self->{header}->{Con}->{reference} = "";
-  $self->{header}->{Wis}->{reference} = "";
-  $self->{header}->{Int}->{reference} = "";
-  $self->{header}->{Cha}->{reference} = "";
-  $self->{header}->{PrimaryAbil}->{reference} = "";
-  $self->{header}->{AlignRestrict}->{reference} = "";
-  $self->{header}->{AlignRstrctType}->{reference} = "";
-  $self->{header}->{InvertRestrict}->{reference} = "";
-  $self->{header}->{Constant}->{reference} = "";
-  $self->{header}->{EffCRLvl01}->{reference} = "";
-  $self->{header}->{EffCRLvl02}->{reference} = "";
-  $self->{header}->{EffCRLvl03}->{reference} = "";
-  $self->{header}->{EffCRLvl04}->{reference} = "";
-  $self->{header}->{EffCRLvl05}->{reference} = "";
-  $self->{header}->{EffCRLvl06}->{reference} = "";
-  $self->{header}->{EffCRLvl07}->{reference} = "";
-  $self->{header}->{EffCRLvl09}->{reference} = "";
-  $self->{header}->{EffCRLvl10}->{reference} = "";
-  $self->{header}->{EffCRLvl11}->{reference} = "";
-  $self->{header}->{EffCRLvl12}->{reference} = "";
-  $self->{header}->{EffCRLvl13}->{reference} = "";
-  $self->{header}->{EffCRLvl14}->{reference} = "";
-  $self->{header}->{EffCRLvl15}->{reference} = "";
-  $self->{header}->{EffCRLvl16}->{reference} = "";
-  $self->{header}->{EffCRLvl17}->{reference} = "";
-  $self->{header}->{EffCRLvl18}->{reference} = "";
-  $self->{header}->{EffCRLvl19}->{reference} = "";
-  $self->{header}->{EffCRLvl20}->{reference} = "";
-  $self->{header}->{PreReqTable}->{reference} = "2da";
-  $self->{header}->{MaxLevel}->{reference} = "";
-  $self->{header}->{XPPenalty}->{reference} = "";
-  $self->{header}->{ArcSpellLvlMod}->{reference} = "";
-  $self->{header}->{DivSpellLvlMod}->{reference} = "";
-  $self->{header}->{EpicLevel}->{reference} = "";
-  $self->{header}->{Package}->{reference} = "row/packages.2da";
-  $self->{header}->{StatGainTable}->{reference} = "2da";
-  $self->{header}->{MemorizesSpells}->{reference} = "";
-  $self->{header}->{SpellbookRestricted}->{reference} = "";
-  $self->{header}->{PickDomains}->{reference} = "";
-  $self->{header}->{PickSchool}->{reference} = "";
-  $self->{header}->{LearnScroll}->{reference} = "";
-  $self->{header}->{Arcane}->{reference} = "";
-  $self->{header}->{ASF}->{reference} = "";
-  $self->{header}->{SpellcastingAbil}->{reference} = "";
-  $self->{header}->{SpellTableColumn}->{reference} = "header/spells.2da";
-  $self->{header}->{CLMultiplier}->{reference} = "";
-  $self->{header}->{MinCastingLevel}->{reference} = "";
-  $self->{header}->{MinAssociateLevel}->{reference} = "";
-  $self->{header}->{CanCastSpontaneously}->{reference} = "";
-
+     $self->{errors} = ();
+     $self->{tests} = 0;
+     $self->{fails} = 0;
 
   bless($self, $class);
 }
 
-sub child {
+sub set_error {
   my $self = shift;
-
-  return $self->{child};
-}
-
-sub datatype {
-  my $self = shift;
-  my $header = shift;
+  my $error = shift;
   
-  if (!exists($self->{header}->{$header}->{datatype})) {
-    return "";
-  }
-  return $self->{header}->{$header}->{datatype};
+  push(@{$self->{errors}}, $error);
+  $self->{fails}++;
 }
 
-sub maxrows {
+
+sub errors {
+  my $self = shift;
+  
+  return @{$self->{errors}};
+}
+
+sub tests {
+  my $self = shift;
+  
+  return $self->{tests};
+}
+
+sub fails {
+  my $self = shift;
+  
+  return $self->{fails};
+}
+
+sub test_file {
   my $self = shift;
 
-  return $self->{maxrows};
+  $self->assert_maxrows($self->rows, $self->{spec}->maxrows());
 }
 
-sub reference {
+sub test_values {
   my $self = shift;
-  my $header = shift;
+  my @headers = $self->headers();
 
-  if (!exists($self->{header}->{$header}->{reference})) {
-    return "";
+  if (!exists($self->{siblings})) {
+    $self->siblings();
   }
-  return $self->{header}->{$header}->{reference};
+
+  foreach my $header(@headers) {
+    my @col = $self->col($header);
+
+    my $row = 1;
+    foreach my $value(@col) {
+      $self->assert_value($value, $self->{spec}->value($header), "Error on value for " . $header . "(" . $row . "):");
+      $self->assert_reference($self->{spec}->reference($header), $value, "Error on reference for " . $header . "(" . $row . "):");
+      $row++;
+    }
+  }
 }
 
+sub assert_maxrows {
+  my $self = shift;
+  my $value = shift;
+  my $expected = shift;
+  my $message = shift;
+
+  $self->{tests}++;
+
+  if (!defined($message)) {
+    $message = "Error on the maximum number of rows:";
+  }
+  if ($expected == 0) {
+    return 1;
+  }
+  elsif ($value <= $expected) {
+    return 1;
+  }
+
+  $self->set_error($message . "\n  Expected:"  . $expected . "\n  Found:" . $value . "\n");
+  return 0;
+}
+
+sub assert_reference {
+  my $self = shift;
+  my $reference = shift;
+  my $value = shift;
+  my $message = shift;
+
+  if (!defined($message)) {
+    $message = "Reference not found:"
+  }
+
+  # ignore none references or empty values
+  if ($reference eq "" || $value eq "****") {
+    return 1;
+  }
+
+  $self->{tests}++;
+
+  my @reference = split("/", $reference);
+
+  if ($reference[0] eq "2da") {
+    if (!exists($self->{siblings}->{lc($value) . ".2da"})) {
+      $self->set_error($message . "\n  Expected: " . lc($value) . ".2da\n  Found: " . join("|", keys(%{$self->{siblings}})) . "\n");
+      return 0;
+    }
+  }
+}
+
+sub assert_value {
+  my $self = shift;
+  my $value = shift;
+  my $expected = shift;
+  my $message = shift;
+
+  if (!defined($message)) {
+    $message = "Error on value:"
+  }
+  
+  $self->{tests}++;
+
+  if ($value eq "****") {
+    return 1;
+  }
+
+  # check the datatypes
+  if ($expected->[0] eq "int") {
+    if ($value !~ m/^\-?\d+$/) {
+       $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($expected->[0] eq "float") {
+    if ($value !~ m/^\-?\d+(\.\d+)?$/) {
+      $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($expected->[0] eq "bool") {
+    if ($value != 0 && $value != 1) {
+      $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($expected->[0] eq "string") {
+    if ($value !~ m/^[\w*]+$/) {
+      $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($expected->[0] eq "hex") {
+    if ($value !~ m/^0x\d+$/) {
+      $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  
+  # check the values
+  if (defined($expected->[1])) {
+    if ($expected->[1] eq "min" && $value < $expected->[2]) {
+      $self->set_error($message . "\n  Expected minumum of:"  . $expected->[2] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+    elsif ($expected->[1] eq "minmax" && ($value < $expected->[2] || $value > $expected->[3])) {
+      $self->set_error($message . "\n  Expected value between:"  . $expected->[2] . " and " . $expected->[3] . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+    elsif ($expected->[1] eq "prefix" && lc(substr($value, 0, length($expected->[2]))) ne $expected->[2]) {
+      $self->set_error($message . "\n  Expected prefix:"  . $expected->[2] . " and " . $expected->[3] . "\n  Found: " . lc(substr($value, 0, length($expected->[2]))) . "\n");
+      return 0;
+    }
+    elsif ($expected->[1] eq "choose") {
+      my @options;
+      foreach (2 .. scalar(@{$expected})-1) {
+        push(@options, $expected->[$_]);
+      }
+      foreach my $option(@options) {
+        if (lc($value) eq $option) {
+          return 1;
+        }
+      }
+      $self->set_error($message . "\n  Expected one of: "  . join("|", @options) . "\n  Found: " . lc($value) . "\n");
+      return 0;
+    }
+  }
+  return 1;
+}
+
+sub siblings {
+  my $self = shift;
+  opendir(DIR, $self->{path}) or die "Can't open path " . $self->{path} . ": " . $!;
+  my @files = readdir(DIR);
+  closedir(DIR);
+
+  foreach my $file (@files) {
+    if (lc(substr($file, -4)) eq ".2da") {
+      $self->{siblings}->{lc($file)} = $self->{path} . $file;
+    }
+  }
+}
 
 =head1 NAME
 
-    NWN::2da::classes
+    NWN::2da::test
 
 =head1 SYNOPSIS
 
-    my $tda_classes = NWN::2da::classes->new()
+    use NWN::2da::test;
+    my $test = NWN::2da::test->new();
+       $test->load($file);
+       $test->load_spec();
+       $test->test_datatypes();
 
-    print $tda_classes->{header}->{Name}->{description};
+    print "Performed " . $test->tests() . " tests\n";
+    print "Found " . $test->fails() . " errors\n";
 
-=head1 DESCRIPTION
+=head1 DESCIPTION
 
-    This module contains the specification of the classes.2da file.
+    This module tests NWN 2da files on correct formats.
 
 =head1 METHODS
 
 =over
 
-=item child()
+=item load($file)
 
-    Returns 0 if the file is a parent and 1 if the file is a child. Parent
-    files contain info on themselves while children contain reference from
-    these files. Children without a parent are orphans.
+    Load a 2da file.
 
-=item datatype($header)
+=item load_spec()
 
-    Returns a string of with the datatype of the header. One of bool, int,
-    float, hex or string.
+    Load the specifications of a 2da file. If the file type is unknown raises
+    an error.
 
-=item maxrows()
+=item test_files()
 
-    Return a string with the maximum number of rows or 0 when there in no
-    maximum.
+     Tests the maximum number of rows.
 
-=item reference()
+=item test_values()
 
-    Returns a string with a reference for the header. The reference can be one
-    of the following forms: 'tlk' as reference to the TLK table, '2da' as
-    reference to a 2da file, 'header{file}.2da', 'row/{file}.2da' as a
-    reference to a header or row in the given 2da file.
+    Test whether the value of each item in a column is correctly format. Checks
+    include the data format and some specific checks on the value itself. These
+    include minimum and/or maximum values, file prefixes and preset options.
+
+=item tests()
+
+    Returns a string with the number of performed tests.
+
+=item fails()
+
+    Returns a string with the number of failed tests.
+
+=item errors()
+
+    Returns an array with raised errors.
+
+=back
+
+=head1 PRIVATE METHODS
+
+    These methods have been implemented but are used primarily within the
+    module.
+
+=over
+
+=item assert_maxrow($value, $expected, [$message])
+
+    Assert the number of rows against the maximum number of rows.
+
+=item assert_value($value, $expected, [$message])
+
+    Assert the value of a certain cell.
+ 
+=item siblings()
+
+    Get a list of other 2da files in the same directory.
 
 =back
 
 =head1 MORE INFO
 
-    https://nwn.wiki/display/NWN1/classes.2da
-
+    See NWN::2da::spec::{class} for more information on the specifications.
 
 =cut
-
 1;
