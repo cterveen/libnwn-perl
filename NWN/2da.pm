@@ -97,12 +97,26 @@ sub load {
     $self->{type} = "Unknown (" . lc($filename) . ")";
   }
 
+  $self->{path} = $path;
+
   # make an index
   my $i = 0;
   foreach my $header ($self->headers()) {
     $self->{index}->{$header} = $i;
     $i++;
   }
+}
+
+sub load_spec {
+  my $self = shift;
+
+  if ($self->{type} eq "classes") {
+    use NWN::2da::spec::classes;
+    $self->{spec} = NWN::2da::spec::classes->new();
+  }
+  else {
+    $self->set_error("Unknown class");
+  }  
 }
 
 sub row {
@@ -179,6 +193,11 @@ sub version {
 =item load($file)
 
     Load a .2da file
+
+=item load_spec()
+
+    Load the specifications of a 2da file. If the file type is unknown raises
+    an error.
 
 =item col($header)
 
