@@ -65,7 +65,7 @@ sub test_values {
 
     my $row = 1;
     foreach my $value(@col) {
-      $self->assert_value($value, $self->{spec}->value($header), "Error on value for " . $header . "(" . $row . "):");
+      $self->assert_format($value, $self->{spec}->format($header), "Error on format for " . $header . "(" . $row . "):");
       $self->assert_reference($self->{spec}->reference($header), $value, "Error on reference for " . $header . "(" . $row . "):");
       $row++;
     }
@@ -115,13 +115,50 @@ sub assert_reference {
 
   if ($reference[0] eq "2da") {
     if (!exists($self->{siblings}->{lc($value) . ".2da"})) {
-      $self->set_error($message . "\n  Expected: " . lc($value) . ".2da\n  Found: " . join("|", keys(%{$self->{siblings}})) . "\n");
+      my $expected = join("|", sort(keys(%{$self->{siblings}})));
+      if (length($expected) > 69) {
+        $expected = substr($expected, 0, 66) . "...";
+      }
+      $self->set_error($message . "\n  Expected: " . $expected . "\n  Found: " . lc($value) . ".2da\n");
       return 0;
     }
   }
+  elsif ($reference[0] eq "row") {
+    my $tda = $self->load_2da($reference[1]);
+    if (defined($tda)) {
+      if ($value > $tda->rows()) {
+        $self->set_error($message . "\n  Expected: <" . $tda->rows() . "\n  Found: " . lc($value) . ".2da\n");
+        return 0;
+      }
+    }
+    return 1;
+  }
+  elsif ($reference[0] eq "header") {
+    my $tda = $self->load_2da($reference[1]);
+    if (defined($tda)) {
+      my @headers = $tda->headers();
+      foreach my $header(@headers) {
+        if ($value eq $header) {
+          return 1;
+        }
+      }
+      my $expected = join("|", @headers);
+      if (length($expected) > 69) {
+        $expected = substr($expected, 0, 66) . "...";
+      }
+      $self->set_error($message . "\n  Expected: " . $expected . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($reference[0] eq "texture") {
+    # to be implemented
+  }
+  else {
+    $self->set_error("Unknown reference:\n  Expected: 2da|row\n  Found: " . $reference[0] . "\n");
+  }
 }
 
-sub assert_value {
+sub assert_format {
   my $self = shift;
   my $value = shift;
   my $expected = shift;
@@ -200,15 +237,37 @@ sub assert_value {
   return 1;
 }
 
+sub load_2da {
+  my $self = shift;
+  my $file = shift;
+
+  if (!exists($self->{'2da_objects'}->{$file})) {
+    $self->siblings();
+    if (!exists($self->{siblings}->{$file})) {
+      $self->{'2da_objects'}->{$file} = undef;
+      $self->set_error("Required file " . $file . " not found!");
+      return;
+    }
+    my $tda = NWN::2da->new();
+       $tda->load($self->{siblings}->{$file});
+
+       $self->{'2da_objects'}->{$file} = $tda;
+  }
+  return $self->{'2da_objects'}->{$file};
+}
+
 sub siblings {
   my $self = shift;
-  opendir(DIR, $self->{path}) or die "Can't open path " . $self->{path} . ": " . $!;
-  my @files = readdir(DIR);
-  closedir(DIR);
 
-  foreach my $file (@files) {
-    if (lc(substr($file, -4)) eq ".2da") {
-      $self->{siblings}->{lc($file)} = $self->{path} . $file;
+  if (!exists($self->{siblings})) {
+    opendir(DIR, $self->{path}) or die "Can't open path " . $self->{path} . ": " . $!;
+    my @files = readdir(DIR);
+    closedir(DIR);
+
+    foreach my $file (@files) {
+      if (lc(substr($file, -4)) eq ".2da") {
+        $self->{siblings}->{lc($file)} = $self->{path} . $file;
+      }
     }
   }
 }
@@ -251,9 +310,13 @@ sub siblings {
 
 =item test_values()
 
-    Test whether the value of each item in a column is correctly format. Checks
-    include the data format and some specific checks on the value itself. These
-    include minimum and/or maximum values, file prefixes and preset options.
+    Test whether the value of each item in a column is correct.
+
+    The format of the value is checked. This includes checks for minimum and/or
+    maximum values, file prefixes and preset options.
+
+    If a value is a reference to another file there is a check that the file
+    and the reference exists.
 
 =item tests()
 
