@@ -116,9 +116,10 @@ sub load_spec {
     use NWN::2da::spec::classes;
     $self->{spec} = NWN::2da::spec::classes->new();
   }
-  else {
-    $self->set_error("Unknown class");
-  }  
+  if ($self->{type} eq "racialtypes") {
+    use NWN::2da::spec::racialtypes;
+    $self->{spec} = NWN::2da::spec::racialtypes->new();
+  }
 }
 
 sub load_tlk {
