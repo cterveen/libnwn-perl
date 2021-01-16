@@ -1,5 +1,7 @@
 package NWN::2da;
+
 use File::Basename;
+use NWN::tlk;
 
 sub new {
   my $class = shift;
@@ -119,6 +121,16 @@ sub load_spec {
   }  
 }
 
+sub load_tlk {
+  my $self = shift;
+  my $file = shift;
+
+  my $tlk = NWN::tlk->new();
+     $tlk->load($file);
+
+  $self->{tlk} = $tlk;
+}
+
 sub row {
   my $self = shift;
   my $row = shift;
@@ -171,7 +183,7 @@ sub version {
 
 =head1 NAME
 
-    NWN:2da - 2da file parser
+    NWN:2da - Neverwinter Nights 2da file parser
 
 =head1 SYNOPSYS
 
@@ -198,6 +210,10 @@ sub version {
 
     Load the specifications of a 2da file. If the file type is unknown raises
     an error.
+
+=item load_tlk($file)
+
+    Load a tlk file.
 
 =item col($header)
 
