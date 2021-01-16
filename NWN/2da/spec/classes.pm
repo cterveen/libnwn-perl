@@ -7,311 +7,319 @@ sub new {
   $self->{type} = "classes";
   $self->{maxrows} = 254;
   $self->{parent} = "";
+  $self->{label} = "Label";
 
   $self->{header}->{"[id]"} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 254],
+    "format" => ["int", "minmax", 0, 254],
   };
   $self->{header}->{Label} = {
     "reference" => "",
-    "value" => ["string"],
+    "format" => ["string"],
   };
   $self->{header}->{Name} = {
     "reference" => "tlk",
-    "value" => ["int"],
+    "format" => ["int"],
   };
   $self->{header}->{Plural} = {
     "reference" => "tlk",
-    "value" => ["int"],
+    "format" => ["int"],
   };
   $self->{header}->{Lower} = {
     "reference" => "tlk",
-    "value" => ["int"],
+    "format" => ["int"],
   };
   $self->{header}->{Description} = {
     "reference" => "tlk",
-    "value" => ["int"],
+    "format" => ["int"],
   };
   $self->{header}->{Icon} = {
     "reference" => "texture",
-    "value" => ["string", "prefix", "ir_"],
+    "format" => ["string", "prefix", "ir_"],
   };
   $self->{header}->{HitDie} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{AttackBonusTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_atk_"],
+    "format" => ["string", "prefix", "cls_atk_"],
   };
   $self->{header}->{FeatsTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_feat_"],
+    "format" => ["string", "prefix", "cls_feat_"],
   };
   $self->{header}->{SavingThrowTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_savthr_"],
+    "format" => ["string", "prefix", "cls_savthr_"],
   };
   $self->{header}->{SkillsTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_skill_"],
+    "format" => ["string", "prefix", "cls_skill_"],
   };
   $self->{header}->{BonusFeatsTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_bfeat_"],
+    "format" => ["string", "prefix", "cls_bfeat_"],
   };
   $self->{header}->{SkillPointBase} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{SpellGainTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_spgn_"],
+    "format" => ["string", "prefix", "cls_spgn_"],
   };
   $self->{header}->{SpellKnownTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_spkn_"],
+    "format" => ["string", "prefix", "cls_spkn_"],
   };
   $self->{header}->{PlayerClass} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{SpellCaster} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{Str} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{Dex} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{Con} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{Wis} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{Int} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{Cha} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 30],
+    "format" => ["int", "minmax", 0, 30],
   };
   $self->{header}->{PrimaryAbil} = {
     "reference" => "",
-    "value" => ["string", "choose", "str", "dex", "con", "wis", "int", "cha"],
+    "format" => ["string", "choose", "str", "dex", "con", "wis", "int", "cha"],
   };
   $self->{header}->{AlignRestrict} = {
     "reference" => "",
-    "value" => ["hex"],
+    "format" => ["hex"],
   };
   $self->{header}->{AlignRstrctType} = {
     "reference" => "",
-    "value" => ["hex"],
+    "format" => ["hex"],
   };
   $self->{header}->{InvertRestrict} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{Constant} = {
     "reference" => "",
-    "value" => ["string"],
+    "format" => ["string"],
   };
   $self->{header}->{EffCRLvl01} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl02} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl03} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl04} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl05} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl06} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl07} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl08} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl09} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl10} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl11} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl12} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl13} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl14} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl15} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl16} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl17} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl18} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl19} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EffCRLvl20} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{PreReqTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_pres_"],
+    "format" => ["string", "prefix", "cls_pres_"],
   };
   $self->{header}->{MaxLevel} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 40],
+    "format" => ["int", "minmax", 0, 40],
   };
   $self->{header}->{XPPenalty} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{ArcSpellLvlMod} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{DivSpellLvlMod} = {
     "reference" => "",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{EpicLevel} = {
     "reference" => "",
-    "value" => ["int", "min", -1],
+    "format" => ["int", "min", -1],
   };
   $self->{header}->{Package} = {
     "reference" => "row/packages.2da",
-    "value" => ["int", "min", 0],
+    "format" => ["int", "min", 0],
   };
   $self->{header}->{StatGainTable} = {
     "reference" => "2da",
-    "value" => ["string", "prefix", "cls_stat_"],
+    "format" => ["string", "prefix", "cls_stat_"],
   };
   $self->{header}->{MemorizesSpells} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{SpellbookRestricted} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{PickDomains} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{PickSchool} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{LearnScroll} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{Arcane} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{ASF} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
   $self->{header}->{SpellcastingAbil} = {
     "reference" => "",
-    "value" => ["string", "choose", "str", "dex", "con", "wis", "int", "cha"],
+    "format" => ["string", "choose", "str", "dex", "con", "wis", "int", "cha"],
   };
   $self->{header}->{SpellTableColumn} = {
     "reference" => "header/spells.2da",
-    "value" => ["string"],
+    "format" => ["string"],
   };
   $self->{header}->{CLMultiplier} = {
     "reference" => "",
-    "value" => ["float"],
+    "format" => ["float"],
   };
   $self->{header}->{MinCastingLevel} = {
     "reference" => "",
-    "value" => ["float"],
+    "format" => ["float"],
   };
   $self->{header}->{MinAssociateLevel} = {
     "reference" => "",
-    "value" => ["int", "minmax", 0, 255],
+    "format" => ["int", "minmax", 0, 255],
   };
   $self->{header}->{CanCastSpontaneously} = {
     "reference" => "",
-    "value" => ["bool"],
+    "format" => ["bool"],
   };
 
   bless($self, $class);
 }
 
-sub child {
-  my $self = shift;
 
-  return $self->{child};
-}
-
-sub value {
+sub format {
   my $self = shift;
   my $header = shift;
   
-  if (!exists($self->{header}->{$header}->{value})) {
+  if (!exists($self->{header}->{$header}->{format})) {
     return ["unknown header"];
   }
-  return $self->{header}->{$header}->{value}; 
+  return $self->{header}->{$header}->{format}; 
+}
+
+sub label {
+  my $self = shift;
+
+  return $self->{label};
 }
 
 sub maxrows {
   my $self = shift;
 
   return $self->{maxrows};
+}
+
+sub parent {
+  my $self = shift;
+
+  return $self->{parent};
 }
 
 sub reference {
@@ -343,24 +351,7 @@ sub reference {
 
 =over
 
-=item parent()
-
-    Return a string with a reference to a parent file and a header:
-    {file}/{header}. If the file is a base file the string will be empty.
-
-=item maxrows()
-
-    Return a string with the maximum number of rows or 0 when there in no
-    maximum.
-
-=item reference($header)
-
-    Returns a string with a reference for the header. The reference can be one
-    of the following forms: 'tlk' as reference to the TLK table, '2da' as
-    reference to a 2da file, 'header{file}.2da', 'row/{file}.2da' as a
-    reference to a header or row in the given 2da file.
-
-=item value($header)
+=item format($header)
 
     Returns an array reference consisting of the following items: [0] datatype
     [1] test [2]... values for the test.
@@ -372,6 +363,30 @@ sub reference {
     the next two values are the minumum and maximum respecively. When test is
     prefix the next item is the prefix in lower case. On choose the next items
     are the valid options in lower case.
+
+=item label()
+
+    Retuns a string with the header that is used as a label.
+
+=item maxrows()
+
+    Return a string with the maximum number of rows or 0 when there in no
+    maximum.
+
+=item parent()
+
+    Return a string with a reference to a parent file and a header:
+    {file}/{header}. If the file is a base file the string will be empty.
+
+=item reference($header)
+
+    Returns a string with a reference for the header. The reference can be one
+    of the following forms: 'tlk' as reference to the TLK table, '2da' as
+    reference to a 2da file, 'header{file}.2da', 'row/{file}.2da' as a
+    reference to a header or row in the given 2da file.
+
+
+  
 
 =back
 
