@@ -105,7 +105,7 @@ sub read_string {
     my $tlk = NWN::tlk->new();
        $tlk->load("./dialog.tlk");
 
-    print $tlk->item(4);
+    print $tlk->get_string(4);
 
 =head1 DESCRIPTION
 
