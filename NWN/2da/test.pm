@@ -49,7 +49,7 @@ sub fails {
 sub test_file {
   my $self = shift;
 
-  $self->assert_maxrows($self->rows, $self->{spec}->maxrows());
+  $self->assert_maxrows($self->rows, $self->maxrows());
 }
 
 sub test_values {
@@ -63,10 +63,10 @@ sub test_values {
   foreach my $header(@headers) {
     my @col = $self->col($header);
 
-    my $row = 1;
+    my $row = 0;
     foreach my $value(@col) {
-      $self->assert_format($value, $self->{spec}->format($header), "Error on format for " . $header . "(" . $row . "):");
-      $self->assert_reference($self->{spec}->reference($header), $value, "Error on reference for " . $header . "(" . $row . "):");
+      $self->assert_format($value, $self->format($header), "Error on format for " . $header . "(" . $row . "):");
+      $self->assert_reference($self->reference($header), $value, "Error on reference for " . $header . "(" . $row . "):");
       $row++;
     }
   }
@@ -151,7 +151,14 @@ sub assert_reference {
     }
   }
   elsif ($reference[0] eq "texture") {
-    # to be implemented
+    # to be implemented, but no idea where these are located
+  }
+  elsif ($reference[0] eq "tlk") {
+    # to be implemented, not sure whether that is needed as the number of
+    # items in the standard tlk table is very large (112010).
+  }
+  elsif ($reference[0] eq "ltr") {
+    # to be implemented, but no idea where these are located
   }
   else {
     $self->set_error("Unknown reference:\n  Expected: 2da|row\n  Found: " . $reference[0] . "\n");
@@ -281,7 +288,6 @@ sub siblings {
     use NWN::2da::test;
     my $test = NWN::2da::test->new();
        $test->load($file);
-       $test->load_spec();
        $test->test_datatypes();
 
     print "Performed " . $test->tests() . " tests\n";
@@ -298,11 +304,6 @@ sub siblings {
 =item load($file)
 
     Load a 2da file.
-
-=item load_spec()
-
-    Load the specifications of a 2da file. If the file type is unknown raises
-    an error.
 
 =item test_files()
 
