@@ -29,6 +29,24 @@ sub load {
       if ($_ =~ m/^2DA/i) {
         $self->{version} = substr($_, 4);
       }
+      elsif ($_ =~ m/"/) {
+        # items may contain spaces.
+        my @line;
+        while ($line) {
+          if ($_ =~ m/^"([^"]+)"/) {
+            # get the line until the next double quote
+            push(@line, $1);
+
+            $_ =~ s/^"([^"])"\s+//;
+          }
+          else {
+            # get all non space characters
+            $_ =~ m/^"(\S+)/;
+            push(@line, $1);
+            $_ =~ s/^\S+\s+//;
+          }
+        }
+      }
       else {
         my @line = split(/\s+/, $_);
         push(@{$self->{array}}, \@line);
@@ -39,8 +57,14 @@ sub load {
   # set header id at the first column
   unshift(@{$self->{array}[0]}, "[id]");
   
-  # set the type
+  # set the type and load specifications
   my ($filename, $path, $suffix) = fileparse($file);
+  if (lc($filename) eq "appearance.2da") {
+    $self->{type} = "appearance";
+
+    use NWN::2da::spec::appearance;
+    $self->{spec} = NWN::2da::spec::appearance->new();
+  }
   if (lc($filename) eq "armor.2da") {
     $self->{type} = "armor";
   }
@@ -49,6 +73,9 @@ sub load {
   }
   elsif (lc($filename) eq "classes.2da") {
     $self->{type} = "classes";
+
+    use NWN::2da::spec::classes;
+    $self->{spec} = NWN::2da::spec::classes->new();
   }
   elsif (lc($filename) =~ m/^cls_atk_*+.2da/) {
     $self->{type} = "cls_atk";
@@ -85,6 +112,9 @@ sub load {
   }
   elsif (lc($filename) eq "racialtypes.2da") {
     $self->{type} = "racialtypes";
+
+    use NWN::2da::spec::racialtypes;
+    $self->{spec} = NWN::2da::spec::racialtypes->new();
   }
   elsif (lc($filename) eq "skills.2da") {
     $self->{type} = "skills";
@@ -101,21 +131,11 @@ sub load {
 
   $self->{path} = $path;
 
-  # make an index
+  # make an index of the headers
   my $i = 0;
   foreach my $header ($self->headers()) {
     $self->{index}->{$header} = $i;
     $i++;
-  }
-
-  # load specifications
-  if ($self->{type} eq "classes") {
-    use NWN::2da::spec::classes;
-    $self->{spec} = NWN::2da::spec::classes->new();
-  }
-  if ($self->{type} eq "racialtypes") {
-    use NWN::2da::spec::racialtypes;
-    $self->{spec} = NWN::2da::spec::racialtypes->new();
   }
 }
 
