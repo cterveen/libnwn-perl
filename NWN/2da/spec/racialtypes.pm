@@ -145,101 +145,28 @@ sub new {
   bless($self, $class);
 }
 
-
-sub format {
-  my $self = shift;
-  my $header = shift;
-  
-  if (!exists($self->{header}->{$header}->{format})) {
-    return ["unknown header"];
-  }
-  return $self->{header}->{$header}->{format}; 
-}
-
-sub label {
-  my $self = shift;
-
-  return $self->{label};
-}
-
-sub maxrows {
-  my $self = shift;
-
-  return $self->{maxrows};
-}
-
-sub parent {
-  my $self = shift;
-
-  return $self->{parent};
-}
-
-sub reference {
-  my $self = shift;
-  my $header = shift;
-
-  if (!exists($self->{header}->{$header}->{reference})) {
-    return "";
-  }
-  return $self->{header}->{$header}->{reference};
-}
-
-
 =head1 NAME
 
     NWN::2da::racialtypes
 
 =head1 SYNOPSIS
 
-    my $tda_racialtypes = NWN::2da::racialtypes->new()
+    my $spec = NWN::2da->new()
+       $spec->load("racialtypes.2da");
 
-    print $tda_racialtypes->{header}->{Name}->{description};
+    print $spec->label();
 
 =head1 DESCRIPTION
 
-    This module contains the specification of the racialtypes.2da file.
+    This module contains the specification of the classes.2da file.
 
 =head1 METHODS
 
-=over
-
-=item format($header)
-
-    Returns an array reference consisting of the following items: [0] datatype
-    [1] test [2]... values for the test.
-
-    Datatype is one of string, int or bool. Test is either min, minmax, prefix
-    or choose. 
-
-    When test is min the next item in the list is the minimum value. For minmax
-    the next two values are the minumum and maximum respecively. When test is
-    prefix the next item is the prefix in lower case. On choose the next items
-    are the valid options in lower case.
-
-=item label()
-
-    Retuns a string with the header that is used as a label.
-
-=item maxrows()
-
-    Return a string with the maximum number of rows or 0 when there in no maximum.
-
-=item parent()
-
-    Return a string with a reference to a parent file and a header:
-    {file}/{header}. If the file is a base file the string will be empty.
-
-=item reference($header)
-
-    Returns a string with a reference for the header. The reference can be one
-    of the following forms: 'tlk' as reference to the TLK table, '2da' as
-    reference to a 2da file, 'header{file}.2da', 'row/{file}.2da' as a
-    reference to a header or row in the given 2da file.
-
-=back
+    Do not call this module directly but use NWN::2da instead.
 
 =head1 MORE INFO
 
+    NWN::2da
     https://nwn.wiki/display/NWN1/racialtypes.2da
 
 =cut
