@@ -126,8 +126,8 @@ sub assert_reference {
   elsif ($reference[0] eq "row") {
     my $tda = $self->load_2da($reference[1]);
     if (defined($tda)) {
-      if ($value > $tda->rows()) {
-        $self->set_error($message . "\n  Expected: <" . $tda->rows() . "\n  Found: " . lc($value) . ".2da\n");
+      if ($value > $tda->rows()-1) {
+        $self->set_error($message . "\n  Expected: <" . ($tda->rows()-1) . " rows\n  Found: " . lc($value) . "\n");
         return 0;
       }
     }
@@ -143,6 +143,23 @@ sub assert_reference {
         }
       }
       my $expected = join("|", @headers);
+      if (length($expected) > 69) {
+        $expected = substr($expected, 0, 66) . "...";
+      }
+      $self->set_error($message . "\n  Expected: " . $expected . "\n  Found: " . $value . "\n");
+      return 0;
+    }
+  }
+  elsif ($reference[0] eq "col") {
+    my $tda = $self->load_2da($reference[1]);
+    if (defined($tda)) {
+      my @expected = $tda->col($reference[2]);
+      foreach my $expect(@expected) {
+        if ($value eq $expect) {
+          return 1;
+        }
+      }
+      my $expected = join("|", @expected);
       if (length($expected) > 69) {
         $expected = substr($expected, 0, 66) . "...";
       }
@@ -201,7 +218,7 @@ sub assert_format {
     }
   }
   elsif ($expected->[0] eq "string") {
-    if ($value !~ m/^[\w*]+$/) {
+    if ($value !~ m/^[\w_\(\)\-]+$/) {
       $self->set_error($message . "\n  Expected:"  . $expected->[0] . "\n  Found: " . $value . "\n");
       return 0;
     }
