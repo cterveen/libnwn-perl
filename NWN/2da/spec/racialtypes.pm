@@ -45,6 +45,10 @@ sub new {
     "reference" => "tlk",
     "format" => ["int", "min", 1],
   };
+  $self->{header}->{Icon} = {
+    "reference" => "",
+    "format" => ["string"],
+  };
   $self->{header}->{Appearance} = {
     "reference" => "row/appearance.2da",
     "format" => ["int", "min", 0],
@@ -130,6 +134,10 @@ sub new {
     "format" => ["int", "min", 0],
   };
   $self->{header}->{AbilitiesPointBuyNumber} = {
+    "reference" => "",
+    "format" => ["int", "min", 0],
+  };
+  $self->{header}->{NormalFeatEveryNthLevel} = {
     "reference" => "",
     "format" => ["int", "min", 0],
   };
