@@ -13,23 +13,15 @@ sub load {
   
   $self->{'debuglog'} .= "Open $file\n";
   open($self->{'fh'}, "<", $file) or die "Can't open $file: $!";
-  $self->get_headers();
-  $self->get_stringtable();
-}
 
-sub get_headers {
-  my $self = shift;
-  # this shouldn't be an issue, paranoia.
+  # get the headers
   $self->{headers}->{FileType} = $self->read_string(4);
   $self->{headers}->{FileVersion} = $self->read_string(4);
   $self->{headers}->{LanguageID} = $self->read_dword();
   $self->{headers}->{StringCount} = $self->read_dword();
   $self->{headers}->{StringEntriesOffset} = $self->read_dword();
-}
 
-sub get_stringtable {
-  my $self = shift;
-
+  # get the string table
   foreach (0 .. ($self->{headers}->{StringCount}-1)) {
     $self->{strings}->[$_]->{flags} = $self->read_dword();
     $self->{strings}->[$_]->{SoundResRef} = $self->read_string(16);
