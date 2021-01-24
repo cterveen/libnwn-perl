@@ -114,7 +114,7 @@ sub new {
     "format" => ["string", "prefix", "po_"],
   };
   $self->{header}->{SIZECATEGORY} = {
-    "reference" => "row/sizecategories.2da",
+    "reference" => "row/creaturesize.2da",
     "format" => ["int", "min", 0],
   };
   $self->{header}->{PERCEPTIONDIST} = {
@@ -170,16 +170,14 @@ sub new {
 
 =head1 DESCRIPTION
 
-    This module contains the specification of the classes.2da file.
-
-=head1 METHODS
-
-    Do not call this module directly but use NWN::2dac instead.
+    This module contains the specification of the appearance.2da file. Do not
+    call this module directly but use the methods on file specification in
+    NWN::2da instead.
 
 =head1 MORE INFO
 
     NWN::2da
-    https://nwn.wiki/display/NWN1/classes.2da
+    https://nwn.wiki/display/NWN1/appearance.2da
 
 =cut
 
