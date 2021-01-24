@@ -109,6 +109,9 @@ sub load {
   }
   elsif (lc($filename) =~ m/^race_feat_/) {
     $self->{type} = "race_feat_";
+
+    use NWN::2da::spec::racefeat;
+    $self->{spec} = NWN::2da::spec::racefeat->new();
   }
   elsif (lc($filename) eq "racialtypes.2da") {
     $self->{type} = "racialtypes";
@@ -160,6 +163,10 @@ sub label {
 
 sub maxrows {
   my $self = shift;
+
+  if(!exists($self->{spec}->{maxrows})) {
+    return -1;
+  }
 
   return $self->{spec}->{maxrows};
 }
