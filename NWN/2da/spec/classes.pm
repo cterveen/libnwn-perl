@@ -306,11 +306,9 @@ sub new {
 
 =head1 DESCRIPTION
 
-    This module contains the specification of the classes.2da file.
-
-=head1 METHODS
-
-    Do not call this module directly but use NWN::2dac instead.
+    This module contains the specification of the classes.2da file. Do not
+    call this module directly but use the methods on file specification in
+    NWN::2da instead.
 
 =head1 MORE INFO
 
