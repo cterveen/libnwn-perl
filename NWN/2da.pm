@@ -59,17 +59,30 @@ sub load {
   
   # set the type and load specifications
   my ($filename, $path, $suffix) = fileparse($file);
+
   if (lc($filename) eq "appearance.2da") {
     $self->{type} = "appearance";
 
     use NWN::2da::spec::appearance;
     $self->{spec} = NWN::2da::spec::appearance->new();
   }
+  if (lc($filename) eq "appearancesndset.2da") {
+    $self->{type} = "appearancesndset";
+
+    use NWN::2da::spec::appearancesndset;
+    $self->{spec} = NWN::2da::spec::appearancesndset->new();
+  }
   if (lc($filename) eq "armor.2da") {
     $self->{type} = "armor";
   }
   elsif (lc($filename) eq "baseitems.2da") {
     $self->{type} = "baseitems";
+  }
+  if (lc($filename) eq "bodybag.2da") {
+    $self->{type} = "bodybag";
+
+    use NWN::2da::spec::bodybag;
+    $self->{spec} = NWN::2da::spec::bodybag->new();
   }
   elsif (lc($filename) eq "classes.2da") {
     $self->{type} = "classes";
@@ -98,6 +111,12 @@ sub load {
   elsif (lc($filename) =~ m/^cls_stat_*+.2da/) {
     $self->{type} = "cls_stat";
   }
+  elsif (lc($filename) eq "creaturespeed.2da") {
+    $self->{type} = "creaturespeed";
+
+    use NWN::2da::spec::creaturespeed;
+    $self->{spec} = NWN::2da::spec::creaturespeed->new();
+  }
   elsif (lc($filename) eq "encumbrance.2da") {
     $self->{type} = "encumbrance";
   }
@@ -106,6 +125,30 @@ sub load {
   }
   elsif (lc($filename) eq "feat.2da") {
     $self->{type} = "feat";
+  }
+  elsif (lc($filename) eq "footstepsounds.2da") {
+    $self->{type} = "footstepsounds";
+
+    use NWN::2da::spec::footstepsounds;
+    $self->{spec} = NWN::2da::spec::footstepsounds->new();
+  }
+  elsif (lc($filename) eq "lightcolor.2da") {
+    $self->{type} = "lightcolor";
+
+    use NWN::2da::spec::lightcolor;
+    $self->{spec} = NWN::2da::spec::lightcolor->new();
+  }
+  elsif (lc($filename) eq "placeableobjsnds.2da") {
+    $self->{type} = "placeableobjsnds";
+    
+    use NWN::2da::spec::placeableobjsnds;
+    $self->{spec} = NWN::2da::spec::placeableobjsnds->new();
+  }
+  elsif (lc($filename) eq "placeables.2da") {
+    $self->{type} = "placeables";
+
+    use NWN::2da::spec::placeables;
+    $self->{spec} = NWN::2da::spec::placeables->new();
   }
   elsif (lc($filename) =~ m/^race_feat_/) {
     $self->{type} = "race_feat_";
