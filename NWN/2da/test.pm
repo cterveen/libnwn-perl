@@ -59,10 +59,20 @@ sub test_file {
   foreach my $header(@headers) {
     $self->assert_in_list($header, \@defined_headers, "Error undefined header in " . $self->{file} . ":");
   }
-  
+
   # test whether there are missing headers
   foreach my $header(@defined_headers) {
     $self->assert_in_list($header, \@headers, "Error missing header in " . $self->{file} . ":");
+  }
+
+  # test whether the id's are set right
+  my $row = 0;
+  foreach my $id ($self->col("[id]")) {
+    if ($id eq "****") {
+      next;
+    }
+    $self->assert_equals($id, $row, "Wrong row id set:");
+    $row++;
   }
 }
 
@@ -228,7 +238,7 @@ sub assert_is_float {
 
   $self->{tests}++;
 
-  if ($value =~ m/^\-?\d+(\.\d+)?$/) {
+  if ($value =~ m/^\-?\d*(\.\d+)?$/) {
     return 1;
   }
   $self->set_error($message . "\nExpected: a float\nFound: " . $value . "\n");
@@ -262,7 +272,7 @@ sub assert_is_string {
 
   $self->{tests}++;
 
-  if ($value =~ m/^[\w_\(\)\-]+$/) {
+  if ($value =~ m/^[\w_\(\)\-\s:;,.']+$/) {
     return 1;
   }
   $self->set_error($message . "\nExpected: a string\nFound: " . $value . "\n");
@@ -283,6 +293,23 @@ sub assert_is_hex {
     return 1;
   }
   $self->set_error($message . "\nExpected: a hex\nFound: " . $value . "\n");
+  return 0;
+}
+
+sub assert_equals {
+  my $self = shift;
+  my $value = shift;
+  my $expected = shift;
+  my $message = shift;
+  
+  if (!defined($message)) {
+    $message  = "Error on check for equality:";
+  }
+  if ($value == $expected) {
+    return 1;
+  }
+  $self->set_error($message . "\nExpected: " . $expected . "\nFound: " . $value . "\n");
+  return 0;
 }
 
 sub assert_between_or_equal {
@@ -462,7 +489,11 @@ sub assert_prefix {
 
 =item assert_between_or_equal($value, $min, $max, $message)
 
-    Asserts wheter a value is between or equal to the set minimum and maxiumum.
+    Asserts whether a value is between or equal to the set minimum and maxiumum.
+
+=item assert_equals($value, $expected, $message)
+
+    Assert whether a value is numerical equal to the expected value.
 
 =item assert_in_list($value, $list, $message)
 
