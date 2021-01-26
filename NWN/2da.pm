@@ -32,20 +32,21 @@ sub load {
       elsif ($_ =~ m/"/) {
         # items may contain spaces.
         my @line;
-        while ($line) {
+        while ($_ ne "") {
           if ($_ =~ m/^"([^"]+)"/) {
             # get the line until the next double quote
             push(@line, $1);
 
-            $_ =~ s/^"([^"])"\s+//;
+            $_ =~ s/^"([^"]+)"(\s*)//;
           }
           else {
             # get all non space characters
-            $_ =~ m/^"(\S+)/;
+            $_ =~ m/^(\S+)/;
             push(@line, $1);
-            $_ =~ s/^\S+\s+//;
+            $_ =~ s/^\S+(\s*)//;
           }
         }
+        push(@{$self->{array}}, \@line);
       }
       else {
         my @line = split(/\s+/, $_);
