@@ -85,6 +85,12 @@ sub load {
     use NWN::2da::spec::bodybag;
     $self->{spec} = NWN::2da::spec::bodybag->new();
   }
+  elsif (lc($filename) eq "categories.2da") {
+    $self->{type} = "categories";
+
+    use NWN::2da::spec::categories;
+    $self->{spec} = NWN::2da::spec::categories->new();
+  }
   elsif (lc($filename) eq "classes.2da") {
     $self->{type} = "classes";
 
@@ -126,6 +132,9 @@ sub load {
   }
   elsif (lc($filename) eq "feat.2da") {
     $self->{type} = "feat";
+
+    use NWN::2da::spec::feat;
+    $self->{spec} = NWN::2da::spec::feat->new();
   }
   elsif (lc($filename) eq "footstepsounds.2da") {
     $self->{type} = "footstepsounds";
@@ -138,6 +147,12 @@ sub load {
 
     use NWN::2da::spec::lightcolor;
     $self->{spec} = NWN::2da::spec::lightcolor->new();
+  }
+  elsif (lc($filename) eq "masterfeats.2da") {
+    $self->{type} = "masterfeats";
+
+    use NWN::2da::spec::masterfeats;
+    $self->{spec} = NWN::2da::spec::masterfeats->new();
   }
   elsif (lc($filename) eq "placeableobjsnds.2da") {
     $self->{type} = "placeableobjsnds";
@@ -168,6 +183,9 @@ sub load {
   }
   elsif (lc($filename) eq "spells.2da") {
     $self->{type} = "spells";
+
+    use NWN::2da::spec::spells;
+    $self->{spec} = NWN::2da::spec::spells->new();
   }
   elsif (lc($filename) eq "spellschools.2da") {
     $self->{type} = "spellschools";
