@@ -90,7 +90,10 @@ sub test_values {
 
     foreach my $value(@col) {
 
-      # ignore if empty (****)
+      # ignore if undefined or empty (****)
+      if (!defined($value)) {
+        next;
+      }
       if ($value eq "****") {
         $row++;
         next;
