@@ -53,7 +53,7 @@ sub new {
 =head1 MORE INFO
 
     NWN::2da
-    https://nwn.fandom.com/wiki/Race_feat_*.2da
+    https://nwn.fandom.com/wiki/Masterfeats.2da
 
 =cut
 
