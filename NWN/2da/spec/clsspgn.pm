@@ -85,7 +85,7 @@ sub new {
 =head1 MORE INFO
 
     NWN::2da
-    https://nwn.fandom.com/wiki/Cls_atk_*.2da
+    https://nwn.fandom.com/wiki/Cls_spgn_*.2da
 
 =cut
 
