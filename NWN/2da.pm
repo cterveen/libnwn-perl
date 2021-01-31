@@ -75,9 +75,15 @@ sub load {
   }
   if (lc($filename) eq "armor.2da") {
     $self->{type} = "armor";
+
+    use NWN::2da::spec::armor;
+    $self->{spec} = NWN::2da::spec::armor->new();
   }
   elsif (lc($filename) eq "baseitems.2da") {
     $self->{type} = "baseitems";
+
+    use NWN::2da::spec::baseitems;
+    $self->{spec} = NWN::2da::spec::baseitems->new();
   }
   if (lc($filename) eq "bodybag.2da") {
     $self->{type} = "bodybag";
@@ -97,26 +103,44 @@ sub load {
     use NWN::2da::spec::classes;
     $self->{spec} = NWN::2da::spec::classes->new();
   }
-  elsif (lc($filename) =~ m/^cls_atk_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_atk_.+\.2da/) {
     $self->{type} = "cls_atk";
+
+    use NWN::2da::spec::clsatk;
+    $self->{spec} = NWN::2da::spec::clsatk->new();
   }
-  elsif (lc($filename) =~ m/^cls_bfeat_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_bfeat_.+\.2da/) {
     $self->{type} = "cls_bfeat";
+
+    use NWN::2da::spec::clsbfeat;
+    $self->{spec} = NWN::2da::spec::clsbfeat->new();
   }
-  elsif (lc($filename) =~ m/^cls_feat_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_feat_.+\.2da/) {
     $self->{type} = "cls_feat";
+
+    use NWN::2da::spec::clsfeat;
+    $self->{spec} = NWN::2da::spec::clsfeat->new();
   }
-  elsif (lc($filename) =~ m/^cls_pres_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_pres_.+\.2da/) {
     $self->{type} = "cls_pres";
   }
-  elsif (lc($filename) =~ m/^cls_skill_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_skill_.+\.2da/) {
     $self->{type} = "cls_skill";
+
+    use NWN::2da::spec::clsskill;
+    $self->{spec} = NWN::2da::spec::clsskill->new();
   }
-  elsif (lc($filename) =~ m/^cls_spgn_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_spgn_.+\.2da/) {
     $self->{type} = "cls_spgn";
+
+    use NWN::2da::spec::clsspgn;
+    $self->{spec} = NWN::2da::spec::clsspgn->new();
   }
-  elsif (lc($filename) =~ m/^cls_stat_*+.2da/) {
+  elsif (lc($filename) =~ m/^cls_stat_.+\.2da/) {
     $self->{type} = "cls_stat";
+
+    use NWN::2da::spec::clsstat;
+    $self->{spec} = NWN::2da::spec::clsstat->new();
   }
   elsif (lc($filename) eq "creaturespeed.2da") {
     $self->{type} = "creaturespeed";
@@ -124,11 +148,20 @@ sub load {
     use NWN::2da::spec::creaturespeed;
     $self->{spec} = NWN::2da::spec::creaturespeed->new();
   }
+  elsif (lc($filename) eq "domains.2da") {
+    $self->{type} = "domains";
+  }
   elsif (lc($filename) eq "encumbrance.2da") {
     $self->{type} = "encumbrance";
+
+    use NWN::2da::spec::encumbrance;
+    $self->{spec} = NWN::2da::spec::encumbrance->new();
   }
   elsif (lc($filename) eq "exptable.2da") {
     $self->{type} = "exptable";
+
+    use NWN::2da::spec::exptable;
+    $self->{spec} = NWN::2da::spec::exptable->new();
   }
   elsif (lc($filename) eq "feat.2da") {
     $self->{type} = "feat";
@@ -154,9 +187,27 @@ sub load {
     use NWN::2da::spec::masterfeats;
     $self->{spec} = NWN::2da::spec::masterfeats->new();
   }
+  elsif (lc($filename) eq "packages.2da") {
+    $self->{type} = "packages";
+
+    use NWN::2da::spec::packages;
+    $self->{spec} = NWN::2da::spec::packages->new();
+  }
+  elsif (lc($filename) =~ m/^packeq/) {
+    $self->{type} = "packeq";
+  }
+  elsif (lc($filename) =~ m/^packft/) {
+    $self->{type} = "packft";
+  }
+  elsif (lc($filename) =~ m/^packsk/) {
+    $self->{type} = "packsk";
+  }
+  elsif (lc($filename) =~ m/^packsp/) {
+    $self->{type} = "packsp";
+  }
   elsif (lc($filename) eq "placeableobjsnds.2da") {
     $self->{type} = "placeableobjsnds";
-    
+
     use NWN::2da::spec::placeableobjsnds;
     $self->{spec} = NWN::2da::spec::placeableobjsnds->new();
   }
@@ -178,8 +229,17 @@ sub load {
     use NWN::2da::spec::racialtypes;
     $self->{spec} = NWN::2da::spec::racialtypes->new();
   }
+  elsif (lc($filename) eq "ranges.2da") {
+    $self->{type} = "ranges";
+
+    use NWN::2da::spec::ranges;
+    $self->{spec} = NWN::2da::spec::ranges->new();
+  }
   elsif (lc($filename) eq "skills.2da") {
     $self->{type} = "skills";
+
+    use NWN::2da::spec::skills;
+    $self->{spec} = NWN::2da::spec::skills->new();
   }
   elsif (lc($filename) eq "spells.2da") {
     $self->{type} = "spells";
@@ -189,6 +249,9 @@ sub load {
   }
   elsif (lc($filename) eq "spellschools.2da") {
     $self->{type} = "spellschools";
+
+    use NWN::2da::spec::spellschools;
+    $self->{spec} = NWN::2da::spec::spellschools->new();
   }
   else {
     $self->{type} = "Unknown (" . lc($filename) . ")";
