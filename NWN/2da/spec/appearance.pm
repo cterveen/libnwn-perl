@@ -159,12 +159,12 @@ sub new {
 
 =head1 NAME
 
-    NWN::2da::spec::classes
+    NWN::2da::spec::appearance
 
 =head1 SYNOPSIS
 
     my $spec = NWN::2da->new()
-       $spec->load("classes.2da");
+       $spec->load("appearance.2da");
 
     print $spec->label();
 
