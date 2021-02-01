@@ -38,11 +38,11 @@ sub new {
     "format" => ["string", "choose", "v", "s", "vs"],
   };
   $self->{header}->{MetaMagic} = {
-    "reference" => "",
+    "reference" => "hex/empower/extend/maximize/quicken/silent/still",
     "format" => ["hex"],
   };
   $self->{header}->{TargetType} = {
-    "reference" => "",
+    "reference" => "hex/self/creature/area/items/door/placeable/trigger",
     "format" => ["hex"],
   };
   $self->{header}->{ImpactScript} = {
