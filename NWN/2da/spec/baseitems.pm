@@ -30,7 +30,7 @@ sub new {
     "format" => ["int"],
   };
   $self->{header}->{EquipableSlots} = {
-    "reference" => "",
+    "reference" => "hex/Helmet/Armor/Boots/Gloves/Main hand/Off-hand/Cloak/Rings/Amulet/Belt/Arrow/Bullet/Bolt/Creature weapons/Creature armor",
     "format" => ["hex"],
   };
   $self->{header}->{CanRotateIcon} = {
