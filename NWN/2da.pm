@@ -492,8 +492,9 @@ sub version {
 
     Returns a string with a reference for the header. The reference can be one
     of the following forms: 'tlk' as reference to the TLK table, '2da' as
-    reference to a 2da file, 'header/{file}.2da', 'row/{file}.2da' as a
-    reference to a header or row in the given 2da file.
+    reference to a 2da file, 'header/{file}.2da' or 'row/{file}.2da' as a
+    reference to a header or row in the given 2da file,
+    'hex/{0x1 value}/{0x2 value}/{...} for hexadecimals.
 
 =back
 
