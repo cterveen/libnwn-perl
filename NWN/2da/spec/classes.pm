@@ -110,11 +110,11 @@ sub new {
     "format" => ["string", "choose", "str", "dex", "con", "wis", "int", "cha"],
   };
   $self->{header}->{AlignRestrict} = {
-    "reference" => "",
+    "reference" => "hex/non-neutral/non-lawful/non-chaotic/non-good/non-evil",
     "format" => ["hex"],
   };
   $self->{header}->{AlignRstrctType} = {
-    "reference" => "",
+    "reference" => "hex/law-chaos/good-evil",
     "format" => ["hex"],
   };
   $self->{header}->{InvertRestrict} = {
