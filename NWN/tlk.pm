@@ -37,6 +37,10 @@ sub get_string {
   my $self = shift;
   my $id = shift;
 
+  if ($id > $self->{headers}->{StringCount}) {
+    return "Bad Strref (> StringCount)" ;
+  }
+
   my $offset = $self->{headers}->{StringEntriesOffset} + $self->{strings}->[$id]->{OffsetToString};
   seek($self->{'fh'}, $offset, 0);
 
@@ -119,6 +123,7 @@ sub read_string {
 
 =head1 MORE INFO
 
+    https://nwn.wiki/display/NWN1/TLK
     https://nwn.wiki/pages/viewpage.action?pageId=327727&preview=%2F327727%2F327747%2FBioware_Aurora_TalkTable_Format.pdf
 
 =cut
