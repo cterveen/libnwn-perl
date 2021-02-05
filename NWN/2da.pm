@@ -322,6 +322,16 @@ sub load_tlk {
   $self->{tlk} = $tlk;
 }
 
+sub load_mod_tlk {
+  my $self = shift;
+  my $file = shift;
+
+  my $tlk = NWN::tlk->new();
+     $tlk->load($file);
+
+  $self->{mod_tlk} = $tlk;
+}
+
 sub cell {
   my $self = shift;
   my $header = shift;
@@ -411,7 +421,12 @@ sub version {
 
 =item load_tlk($file)
 
-    Load a tlk file.
+    Load an NWN::tlk object for the file and store it in $self->{tlk}.
+
+=item load_mod_tlk($file)
+
+    Load an NWN::tlk object for the file and store it in $self->{mod_tlk}. This
+    NWN::tlk object can be used for string references above 16777216.
 
 =back
 
