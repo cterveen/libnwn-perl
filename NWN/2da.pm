@@ -123,6 +123,15 @@ sub load {
   }
   elsif (lc($filename) =~ m/^cls_pres_.+\.2da/) {
     $self->{type} = "cls_pres";
+
+    use NWN::2da::spec::clspres;
+    $self->{spec} = NWN::2da::spec::clspres->new();
+  }
+  elsif (lc($filename) =~ m/^cls_savthr_.+\.2da/) {
+    $self->{type} = "cls_skill";
+
+    use NWN::2da::spec::clssavthr;
+    $self->{spec} = NWN::2da::spec::clssavthr->new();
   }
   elsif (lc($filename) =~ m/^cls_skill_.+\.2da/) {
     $self->{type} = "cls_skill";
