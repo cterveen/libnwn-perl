@@ -163,6 +163,12 @@ sub load {
     use NWN::2da::spec::creaturespeed;
     $self->{spec} = NWN::2da::spec::creaturespeed->new();
   }
+  elsif (lc($filename) eq "creaturesize.2da") {
+    $self->{type} = "creaturesize";
+
+    use NWN::2da::spec::creaturesize;
+    $self->{spec} = NWN::2da::spec::creaturesize->new();
+  }
   elsif (lc($filename) eq "domains.2da") {
     $self->{type} = "domains";
   }
