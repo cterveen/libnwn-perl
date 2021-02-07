@@ -145,6 +145,12 @@ sub load {
     use NWN::2da::spec::clsspgn;
     $self->{spec} = NWN::2da::spec::clsspgn->new();
   }
+  elsif (lc($filename) =~ m/^cls_spkn_.+\.2da/) {
+    $self->{type} = "cls_spkn";
+
+    use NWN::2da::spec::clsspkn;
+    $self->{spec} = NWN::2da::spec::clsspkn->new();
+  }
   elsif (lc($filename) =~ m/^cls_stat_.+\.2da/) {
     $self->{type} = "cls_stat";
 
