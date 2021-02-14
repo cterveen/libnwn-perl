@@ -23,7 +23,7 @@ sub new {
   };
   $self->{header}->{ReqParam1} = {
     "reference" => "",
-    "format" => ["int", "min", 0],
+    "format" => ["string"],
   };
   $self->{header}->{ReqParam2} = {
     "reference" => "",
