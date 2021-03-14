@@ -151,9 +151,11 @@ sub test_values {
           $self->assert_in_list(lc($value . ".2da"), \@expected, $message);
         }
         elsif ($reference[0] eq "row") {
-          my $tda = $self->load_2da($reference[1]);
-          if (defined($tda)) {
-            $self->assert_between_or_equal($value, 0, $tda->rows(-1), $message);
+          if ($value < 16777216) {
+            my $tda = $self->load_2da($reference[1]);
+            if (defined($tda)) {
+              $self->assert_between_or_equal($value, 0, $tda->rows(-1), $message);
+            }
           }
         }
         elsif ($reference[0] eq "header") {
