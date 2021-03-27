@@ -42,7 +42,7 @@ sub new {
     "format" => ["int"],
   };
   $self->{header}->{BASEITEMSTATREF} = {
-    "reference" => "",
+    "reference" => "tlk",
     "format" => ["int"],
   };
 
