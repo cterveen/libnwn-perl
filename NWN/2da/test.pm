@@ -22,7 +22,7 @@ sub new {
 sub set_error {
   my $self = shift;
   my $error = shift;
-  
+
   push(@{$self->{errors}}, $error);
   $self->{fails}++;
 }
@@ -35,13 +35,13 @@ sub errors {
 
 sub tests {
   my $self = shift;
-  
+
   return $self->{tests};
 }
 
 sub fails {
   my $self = shift;
-  
+
   return $self->{fails};
 }
 
