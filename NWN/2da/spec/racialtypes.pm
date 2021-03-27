@@ -17,10 +17,6 @@ sub new {
     "reference" => "",
     "format" => ["string"],
   };
-  $self->{header}->{Name} = {
-    "reference" => "tlk",
-    "format" => ["int", "min", 1],
-  };
   $self->{header}->{Abrev} = {
     "reference" => "",
     "format" => ["string"],
