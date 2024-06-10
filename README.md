@@ -6,9 +6,9 @@ libnwn-perl
 
 libnwn-perl is a perl package for handling Neverwinter Nights (NWN) and Neverwinter Nights Enhanced Edition (NWN:EE) files. The package was written to parse and test NWN 2da and tlk files.
 
-This is a beta version. All 2da specifications and files are included. POD documentation is available in each module. The package is not in CPAN.
+This is a beta version. The project was used to test the formatting of 2da files and gain easy access to tlk strings. All 2da specifications and files are included. POD documentation is available in each module. The package is not in CPAN.
 
-The project was used to test the formatting of 2da files and gain easy access to tlk strings. Further development is not intended.
+No further development is intended.
 
 ## Installation
 
@@ -48,6 +48,8 @@ The modules that can be used directly are NWN::2da, NWN::tlk and NWN::2da::Test.
     print "Found " . $test->fails() . " errors\n";
 
 ## Credits
+
+Written by Christiaan ter Veen <https://www.rork.nl/>
 
 Technical details from:
 
